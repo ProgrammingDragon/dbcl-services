@@ -2,7 +2,6 @@ package com.dbcl.services.security;
 
 import com.dbcl.services.entity.User;
 import com.dbcl.services.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,11 +16,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class DbclAuthenticationManager implements AuthenticationManager {
-	@Autowired
-	private UserRepository repository;
+	private final UserRepository repository;
+	private final PasswordEncoder encoder;
 
-	@Autowired
-	private PasswordEncoder encoder;
+	public DbclAuthenticationManager(UserRepository repository, PasswordEncoder encoder) {
+		this.repository = repository;
+		this.encoder = encoder;
+	}
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {

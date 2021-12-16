@@ -19,7 +19,7 @@ public class MemberFixture {
 		membership.setMobile("9201234567");
 		membership.setActive(true);
 		membership.setMemberSince("112021");
-		membership.setUsername("PDRAGON");
+		membership.setUsername("pdragon");
 		return membership;
 	}
 }

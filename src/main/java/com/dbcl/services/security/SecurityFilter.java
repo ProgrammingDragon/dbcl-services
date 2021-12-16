@@ -1,7 +1,6 @@
 package com.dbcl.services.security;
 
 import com.dbcl.services.util.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,11 +17,13 @@ import java.io.IOException;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
-	@Autowired
-	private JwtUtil jwtUtil;
+	private final JwtUtil jwtUtil;
+	private final UserDetailsService detailsService;
 
-	@Autowired
-	private UserDetailsService detailsService;
+	public SecurityFilter(JwtUtil jwtUtil, UserDetailsService detailsService) {
+		this.jwtUtil = jwtUtil;
+		this.detailsService = detailsService;
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

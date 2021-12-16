@@ -7,7 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberMapper {
 	public Member map(final Membership membership) {
-		Member member = new Member();
+		return map(membership, new Member());
+	}
+
+	public Member map(final Membership membership, final Member member) {
+		if (member == null) {
+			throw new IllegalArgumentException("Member not found.");
+		}
 		member.setFirstName(membership.getFirstName());
 		member.setLastName(membership.getLastName());
 		member.setAddressLine1(membership.getAddressLine1());
@@ -21,7 +27,7 @@ public class MemberMapper {
 		member.setMobile(membership.getMobile());
 		member.setActive(membership.getActive());
 		member.setMemberSince(membership.getMemberSince());
-		member.setUsername(membership.getUsername());
+		member.setUsername(membership.getUsername().toUpperCase());
 		return member;
 	}
 

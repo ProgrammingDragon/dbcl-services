@@ -32,6 +32,8 @@ public class MemberServiceImpl implements MemberService {
 	public Membership addMember(String personUsername, Membership membership) {
 		Member member = mapper.map(membership);
 		LocalDateTime now = LocalDateTime.now();
+		member.setId(null);
+		member.setUsername(member.getUsername().toUpperCase());
 		member.setCreated(now);
 		member.setModified(now);
 		member.setCreatedBy(personUsername);
@@ -41,7 +43,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Membership updateMember(Long memberId, String personUsername, Membership membership) {
-		Member member = mapper.map(membership);
+		Member member = mapper.map(membership, repository.findById(memberId).orElse(null));
 		member.setModified(LocalDateTime.now());
 		member.setModifiedBy(personUsername);
 		member.setId(memberId);
