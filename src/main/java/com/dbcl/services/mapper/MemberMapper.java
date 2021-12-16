@@ -25,9 +25,10 @@ public class MemberMapper {
 		member.setPhone(membership.getPhone());
 		member.setPhoneExtension(membership.getPhoneExtension());
 		member.setMobile(membership.getMobile());
-		member.setActive(membership.getActive());
-		member.setMemberSince(membership.getMemberSince());
-		member.setUsername(membership.getUsername().toUpperCase());
+		// These can not be modified by the normal user.
+//		member.setActive(membership.getActive());
+//		member.setMemberSince(membership.getMemberSince());
+//		member.setUsername(membership.getUsername().toUpperCase());
 		return member;
 	}
 
