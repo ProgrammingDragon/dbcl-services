@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
@@ -37,5 +39,10 @@ public class UserController {
 		manager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 		return ResponseEntity.ok(new UserResponse(jwtUtil.getGenerateToken(request.getUsername()),
 				"User logged in"));
+	}
+
+	@PostMapping("/test")
+	public ResponseEntity<String> accessAuth(Principal principal) {
+		return ResponseEntity.ok("Principal = " + principal.getName());
 	}
 }
